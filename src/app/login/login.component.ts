@@ -2,7 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from "../_services/authentication.service"
 import { first } from 'rxjs/operators';
-import { ActivatedRoute, Router } from "@angular/router";
+import { ActivatedRoute, Router, Params } from "@angular/router";
+import { GoogleLoginProvider, FacebookLoginProvider, SocialAuthService } from 'angularx-social-login';  
+import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';  
+import { Socialusers } from '../_models/socialusers';  
+import { SocialloginService } from '../_services/sociallogin.service';  
+
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -14,11 +20,16 @@ export class LoginComponent implements OnInit {
   submitted = false;
   returnUrl: string;
   error = '';
+  response;  
+  socialusers=new Socialusers();  
 
-  constructor( private formBuilder: FormBuilder,
+  constructor( 
+    private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    public OAuth: SocialAuthService,
+    private SocialloginService: SocialloginService,  
 ) {
   // redirect to home if already logged in
   if (this.authenticationService.currentUserValue) { 
@@ -27,12 +38,13 @@ export class LoginComponent implements OnInit {
  }
  ngOnInit() {
   this.loginForm = this.formBuilder.group({
-      username: ['', Validators.required],
+      email: ['', Validators.required],
       password: ['', Validators.required]
   });
   // get return url from route parameters or default to '/'
   this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
 }
+
  // convenience getter for easy access to form fields
  get f() { return this.loginForm.controls; }
  onSubmit() {
@@ -45,18 +57,45 @@ export class LoginComponent implements OnInit {
   }
 
   this.loading = true;
-  this.authenticationService.login(this.f.username.value, this.f.password.value)
+  this.authenticationService.login(this.f.email.value, this.f.password.value)
       .pipe(first())
       .subscribe(
           data => {
-              console.log("p");
-              this.router.navigate([this.returnUrl]);
+              this.router.navigate(['\home']);
           },
           error => {
-            console.log("error");
               this.error = error;
               this.loading = false;
           });
 }
+socialSignIn(socialProvider: string) {  
 
+  let socialPlatformProvider;  
+  console.log("hello");
+  if (socialProvider === 'facebook') {  
+    socialPlatformProvider = FacebookLoginProvider.PROVIDER_ID;  
+  }
+  else if (socialProvider === 'google') {  
+    socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;  
+  }  
+  this.OAuth.signIn(socialPlatformProvider).then(socialusers => {  
+    console.log(socialProvider, this.socialusers);  
+    console.log(this.socialusers);  /* 
+    this.Savesresponse(this.socialusers);  */ 
+  });  
+  
+}  
+Savesresponse(socialusers: Socialusers) {  /* 
+  this.SocialloginService.savesresponse(socialusers).subscribe((res: any) => {  
+    debugger;  
+    console.log(res);  
+    this.socialusers=res;  
+    this.response = res.userDetail;  
+    localStorage.setItem('socialusers', JSON.stringify( this.socialusers));  
+    console.log(localStorage.setItem('socialusers', JSON.stringify(this.socialusers)));  
+    this.router.navigate([`/Dashboard`]);  
+  })   */
+  console.log(socialusers);
+  this.router.navigate(['/Home']); 
+}
 }

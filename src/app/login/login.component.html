@@ -1,27 +1,66 @@
-<div class="col-md-6 offset-md-4 mt-5">
-    <div class="card w-50">
+<div class="mt-5">
+    <div class="card">
         <div class="card-body">
             <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                 <div class="form-group">
-                    <label for="username">Username</label>
-                    <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
-                    <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-                        <div *ngIf="f.username.errors.required">Username is required</div>
+                    <label for="email">Enter your email</label>
+                    <input type="email" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                        <div *ngIf="f.email.errors.required">email is required</div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="password">Password</label>
+                    <label for="password">Enter your password</label>
                     <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
                     <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
                         <div *ngIf="f.password.errors.required">Password is required</div>
                     </div>
                 </div>
-                <button [disabled]="loading" class="btn btn-primary">
+                <div class="form-group row">
+                   <!--  <input type="checkbox" formControlName="rememberme" class="form-control w-25 m-0 p-0" [ngClass]="{ 'is-invalid': submitted && f.rememberme.errors }" /> -->
+                    <mat-checkbox class="" >remember me</mat-checkbox>
+                </div>
+                <a> forgot password? </a>
+                <button mat-button class="">SSO Login</button>
+                <div class="row">
+                <button class="col" [disabled]="loading" mat-raised-button>
                     <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                     Login
                 </button>
+                <button mat-raised-button color="primary" routerLink='/register' class="col ml-3">
+                    SignUp
+                </button>
+                </div>
                 <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
             </form>
+
+            <div class="row mt-3">  
+                <div class="col ">  
+                    <button mat-fab (click)="socialSignIn('facebook')" color="primary" >
+                        <mat-icon>facebook</mat-icon>
+                      </button> 
+                </div>  
+                <div class="col">  
+                    <button (click)="socialSignIn('google')" mat-fab color="primary">  
+                        <mat-icon>google</mat-icon>
+                    </button>  
+                </div>  
+                <div class="col">  
+                    <button (click)="socialSignIn('twitter')" mat-fab color="primary">  
+                        <mat-icon>twitter</mat-icon>
+                    </button>  
+                </div>  
+                <div class="col">  
+                    <button (click)="socialSignIn('linkedIn')" mat-fab color="primary">  
+                        <mat-icon>linkedIn</mat-icon>
+                    </button>  
+                </div>  
+                <div class="col">  
+                    <button (click)="socialSignIn('office')" mat-fab color="primary">  
+                        <mat-icon>office</mat-icon>
+                    </button>  
+                </div>  
+            </div>  
         </div>
     </div>
 </div>

@@ -20,12 +20,11 @@ export class AuthenticationService {
     public get currentUserValue(): User {
         return this.currentUserSubject.value;
     }
-
-    register(id:string, password: string){
-        return this.http.post<any>(`${environment.apiUrl}/Users/`, { id, password });
+    register(username:string, email: string, password: string, toc : boolean){
+        return this.http.post<any>(`${environment.apiUrl}/users/add`, { username, email, password, toc });
     }
-    login(username: string, password: string) {
-        return this.http.post<any>(`${environment.apiUrl}/users/`, { username, password })
+    login(email: string, password: string) {
+        return this.http.post<any>(`${environment.apiUrl}/users/authenticate`, { email, password })
             .pipe(map(user => {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
                 localStorage.setItem('currentUser', JSON.stringify(user));
