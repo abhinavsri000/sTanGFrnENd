@@ -25,3 +25,9 @@
     display: flex;
     justify-content: flex-end;
 }
+a:hover{
+    text-decoration: auto;
+}
+.nav{
+    color: rgb(0, 0, 0);
+}
