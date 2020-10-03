@@ -5,7 +5,7 @@ import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
 
 import { User } from '../_models/user';
 
-const users: User[] = [{ id: 1, email: 'test', password: 'test', firstName: 'Test', lastName: 'User' }];
+const users: User[] = [{ id: 1, email: 'test@gmail.com', password: 'test', firstName: 'Test', lastName: 'User' }];
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -33,7 +33,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         function authenticate() {
             const { email, password } = body;
             const user = users.find(x => x.email === email && x.password === password);
-            if (!user) return error('email or password is incorrect');
+            if (!user) return error('Email or password is incorrect');
             return ok({
                 id: user.id,
                 email: user.email,

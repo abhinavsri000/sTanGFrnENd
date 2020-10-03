@@ -19,13 +19,24 @@ export class RegisterComponent implements OnInit {
   hide = true;
   ConfirmPasswordErrorMesssage = " ";
 
-  username = new FormControl();
+  username = new FormControl('');
   email = new FormControl('', [Validators.required, Validators.email]);
-  password = new FormControl('',[Validators.required, Validators.pattern('^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[*.!@$%^&(){}[]:;<>,.?/~_+-=|\]).{8,32}$')])
+  /* password = new FormControl('',[Validators.required, Validators.pattern('^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[*.!@$%^&(){}[]:;<>,.?/~_+-=|\]).{8,32}$')]) */
+  password = new FormControl();
   toc = new FormControl('',[Validators.required,Validators.requiredTrue]);
 
   confirmpassword = new FormControl();
   registerForm = new FormGroup({});
+  constructor(
+    private formBuilder : FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router,
+    private authenticationService : AuthenticationService,
+    ) {}
+
+    ngOnInit() {
+      }
+
   getEmailErrorMessage() {
     if (this.email.hasError('required')) {
       return 'You must enter a value';
@@ -51,24 +62,14 @@ export class RegisterComponent implements OnInit {
       this.ConfirmPasswordErrorMesssage = " ";
     }
   }
-
-  constructor(
-    private formBuilder : FormBuilder,
-    private route: ActivatedRoute,
-    private router: Router,
-    private authenticationService : AuthenticationService,
-    ) {}
-
-    ngOnInit() {
-      }
-
-    onSubmit() {
+  onSubmit() {
       this.submitted = true;
       if (this.registerForm.invalid) {
       console.log("InvalidForm");  
-      return;} 
+      return;
+    } 
       this.loading = true;
-      this.authenticationService.register(this.f.username.value,this.f.email.value,this.f.password.value,this.f.toc.value)
+      this.authenticationService.register(this.username.value,this.email.value,this.password.value,this.toc.value)
       .pipe(first())
       .subscribe( data => {
         this.router.navigate(['/login']);
@@ -77,7 +78,5 @@ export class RegisterComponent implements OnInit {
         this.error = error;
       });
     }
-
-    get f() { return this.registerForm.controls; }
 
 }

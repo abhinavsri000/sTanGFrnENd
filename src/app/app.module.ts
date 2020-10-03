@@ -16,13 +16,12 @@ import { SocialLoginModule, SocialAuthServiceConfig, SocialAuthService } from 'a
 import {
   GoogleLoginProvider,
   FacebookLoginProvider,
-  AmazonLoginProvider,
+  
 } from 'angularx-social-login';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
-
-
-
+import { LandingPageComponent } from './landing-page/landing-page.component';
+import { HomeComponent } from "./home /home.component";
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +29,9 @@ import { FooterComponent } from './footer/footer.component';
     RegisterComponent,
     DashboardComponent,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    LandingPageComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -60,12 +61,6 @@ import { FooterComponent } from './footer/footer.component';
             provider: new FacebookLoginProvider(
               '1069515803463171'
               ),
-          },
-          {
-            id: AmazonLoginProvider.PROVIDER_ID,
-            provider: new AmazonLoginProvider(
-              'clientId'
-            ),
           },
         ],
       } as SocialAuthServiceConfig,

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators,FormControl } from '@angular/forms';
 import { AuthenticationService } from "../_services/authentication.service"
 import { first } from 'rxjs/operators';
 import { ActivatedRoute, Router, Params } from "@angular/router";
@@ -8,21 +8,28 @@ import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-logi
 import { Socialusers } from '../_models/socialusers';  
 import { SocialloginService } from '../_services/sociallogin.service';  
 
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  loginForm: FormGroup;
   loading = false;
   submitted = false;
   returnUrl: string;
   error = '';
   response;  
   socialusers=new Socialusers();  
+  hide = true;
 
+  username = new FormControl('');
+  email = new FormControl('', [Validators.required, Validators.email]);
+  /* password = new FormControl('',[Validators.required, Validators.pattern('^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[*.!@$%^&(){}[]:;<>,.?/~_+-=|\]).{8,32}$')]) */
+  password = new FormControl();
+  rememberPassword = new FormControl('');
+  confirmpassword = new FormControl();
+  loginForm = new FormGroup({});
+  
   constructor( 
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -37,19 +44,12 @@ export class LoginComponent implements OnInit {
 }
  }
  ngOnInit() {
-  this.loginForm = this.formBuilder.group({
-      email: ['', Validators.required],
-      password: ['', Validators.required]
-  });
-  // get return url from route parameters or default to '/'
-  this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-}
+
+ }
 
  // convenience getter for easy access to form fields
- get f() { return this.loginForm.controls; }
  onSubmit() {
   this.submitted = true;
-
   // stop here if form is invalid
   if (this.loginForm.invalid) {
     console.log("InvalidForm");  
@@ -57,7 +57,7 @@ export class LoginComponent implements OnInit {
   }
 
   this.loading = true;
-  this.authenticationService.login(this.f.email.value, this.f.password.value)
+  this.authenticationService.login(this.email.value, this.password.value, this.rememberPassword.value)
       .pipe(first())
       .subscribe(
           data => {
@@ -78,6 +78,9 @@ socialSignIn(socialProvider: string) {
   else if (socialProvider === 'google') {  
     socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;  
   }  
+  else if (socialProvider === 'linkedin') {  
+    socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;  
+  }
   this.OAuth.signIn(socialPlatformProvider).then(socialusers => {  
     console.log(socialProvider, this.socialusers);  
     console.log(this.socialusers);  /* 
@@ -98,4 +101,13 @@ Savesresponse(socialusers: Socialusers) {  /*
   console.log(socialusers);
   this.router.navigate(['/Home']); 
 }
+
+
+getEmailErrorMessage() {
+  if (this.email.hasError('required')) {
+    return 'You must enter a value';
+  }
+  return this.email.hasError('email') ? 'Enter valid Email' : '';
+}
+
 }

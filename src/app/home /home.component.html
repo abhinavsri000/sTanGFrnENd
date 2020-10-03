@@ -1,6 +1,29 @@
-<nav class="navbar navbar-expand navbar-dark bg-dark">
-    <div class="navbar-nav">
-        <a class="nav-item nav-link" routerLink="/">Home</a>
-        <a class="nav-item nav-link" href="" (click)="logout()">Logout</a>
+
+<nav class="navbar fixed-top bg-light navbar-expand-lg shadow-sm p-0">
+  <div class="d-flex justify-content-between w-100 ">
+  <div class="nav nav-item">
+    <button mat-icon-button color="accent">
+      <mat-icon (click)='drawer.toggle()' >menu</mat-icon>
+    </button>
+ 
+  <a href="http://localhost:4200" class="navbar-brand pl-2 p-1 ">
+      <img src="../assets/brand.png" class="p-0" width="40%"/> 
+    </a>
+  </div>  
+    <div class="">
+        <button  mat-icon-button (click)="logout()" color="accent" class="p-0 mr-2"><mat-icon>more_vert</mat-icon></button>    
     </div>
+  </div>
 </nav>
+<div class="">
+  <mat-drawer-container class="drawer-container">
+    <mat-drawer  #drawer mode="side" opened class="drawer">
+      <mat-selection-list class="p-0" #shoes class="m-0 selectionlist" [multiple]="false">
+        <mat-list-option class="list-item p-0" [routerLink]="shoe['routerlink']" *ngFor="let shoe of typesOfShoes" [value]="shoe">
+        {{shoe['name']}}
+        </mat-list-option>
+      </mat-selection-list>
+    </mat-drawer>
+  <mat-drawer-content><router-outlet></router-outlet></mat-drawer-content>
+</mat-drawer-container>
+</div>

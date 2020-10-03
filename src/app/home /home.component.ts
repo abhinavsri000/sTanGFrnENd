@@ -8,16 +8,26 @@ import {User} from '../_models/user';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent{
-
   currentUser: User;
-
+  typesOfShoes = [
+    {name : 'Dashboard',routerlink : './dashboard'},
+    {name : 'Survey Tools',routerlink : './dashboard'},
+    {name : 'Profile',routerlink : './profile'},
+    {name : 'Analytics',routerlink : './dashboard'},
+    {name : 'Settings',routerlink : './dashboard'},
+    {name : 'Billing' ,routerlink : './dashboard'},
+    {name : 'Privacy policy',routerlink : './dashboard'},
+  ]
+  opened ; 
   constructor(
       private router: Router,
       private authenticationService: AuthenticationService
   ) {
       this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
   }
-
+  toogleDrawer(){
+    
+  }
   logout() {
       this.authenticationService.logout();
       this.router.navigate(['/login']);
