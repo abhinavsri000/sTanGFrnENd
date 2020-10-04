@@ -1,5 +1,5 @@
 <nav class="navbar fixed-top bg-light navbar-expand-lg bg-light rounded shadow-sm p-2 justify-content-between">
-    <a href="http://localhost:4200" class="navbar-brand pl-4 p-0 ">
+    <a href="https://surveytabs.herokuapp.com" class="navbar-brand pl-4 p-0 ">
       <img src="../assets/brand.png" class="w-50 p-0"/> 
     </a>
     <div class="row">
@@ -31,7 +31,7 @@
                             <mat-form-field class ="input" appearance="legacy">
                                 <mat-label>Enter the password</mat-label>
                                 <input matInput [type]="hide ? 'password' : 'text'" [formControl]="password" required>
-                                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                                 <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                                 </button>
                             </mat-form-field>

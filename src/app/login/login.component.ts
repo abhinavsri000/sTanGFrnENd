@@ -89,8 +89,8 @@ socialSignIn(socialProvider: string) {
     console.log(this.socialusers);  /* 
     this.Savesresponse(this.socialusers);  */ 
   });  
-  
 }  
+
 Savesresponse(socialusers: Socialusers) {  /* 
   this.SocialloginService.savesresponse(socialusers).subscribe((res: any) => {  
     debugger;  
@@ -98,13 +98,12 @@ Savesresponse(socialusers: Socialusers) {  /*
     this.socialusers=res;  
     this.response = res.userDetail;  
     localStorage.setItem('socialusers', JSON.stringify( this.socialusers));  
-    console.log(localStorage.setItem('socialusers', JSON.stringify(this.socialusers)));  
+    console.log(localStorage.setItem('socialusers', JSON.stringif y(this.socialusers)));  
     this.router.navigate([`/Dashboard`]);  
   })   */
   console.log(socialusers);
   this.router.navigate(['/Home']); 
 }
-
 
 getEmailErrorMessage() {
   if (this.email.hasError('required')) {

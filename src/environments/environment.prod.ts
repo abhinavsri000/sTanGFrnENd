@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://localhost:8000/api',
+  apiUrl: 'https://hidden-temple-43863.herokuapp.com/api/v1/',
   urls: {
     baseUrl: '/api/'
 }

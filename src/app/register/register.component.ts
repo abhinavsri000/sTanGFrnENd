@@ -74,7 +74,6 @@ export class RegisterComponent implements OnInit {
       .subscribe( data => {
         this.router.navigate(['/home']);
       },error => {
-        this.router.navigate(['/home']);
         localStorage.setItem('email',this.email.value);
         localStorage.setItem('password',this.password.value);
         this.loading = false;

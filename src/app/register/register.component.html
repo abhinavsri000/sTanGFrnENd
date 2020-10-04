@@ -1,5 +1,5 @@
 <nav class="navbar fixed-top bg-light navbar-expand-lg rounded bg-light shadow-sm p-2 justify-content-between">
-    <a href="http://localhost:4200" class="navbar-brand pl-4 p-0 ">
+    <a routerLink="../" class="navbar-brand pl-4 p-0 ">
       <img src="../assets/brand.png" class="w-50 p-0"/> 
     </a>
     <div class="row">
@@ -37,16 +37,16 @@
                                 <mat-label>Choose a password</mat-label>
                                 <input matInput [type]="hide ? 'password' : 'text'" [formControl]="password" required>
                                 <mat-error *ngIf="password.invalid">{{getPasswordErrorMessage()}}</mat-error>
-                                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                                 <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                                 </button>
                             </mat-form-field>
 
                             <mat-form-field class ="input" appearance="legacy">
                                 <mat-label>Confirm the password</mat-label>
-                                <input (keyup)="onKeypressEvent($event)" matInput [type]="hide ? 'password' : 'text'" [formControl]="confirmpassword" required>
+                                <input matInput [type]="hide ? 'password' : 'text'" [formControl]="confirmpassword" required>
                                 <mat-error>{{ConfirmPasswordErrorMesssage}}</mat-error>  
-                                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                                 <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                                 </button>
                             </mat-form-field>
@@ -61,22 +61,23 @@
                             </div>
                             <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
                             <p class="small mt-2">or register with social media</p>
-                            <div class="m-0 p-0">
-                                <div class="d-flex row justify-content-around">
-                                <button  class="btn  mt-2 mb-1 pt-1 pb-1">
-                                    Google
-                                </button>
-                                <button class="btn  mt-2 mb-1 pt-1 pb-1">
-                                    Facebook
-                                </button>
-                                <button class="btn mt-2 mb-1 pt-1 pb-1">
-                                    Linkedin
-                                </button><button  class="btn mt-2 mb-1 pt-1 pb-1">
-                                    Twitter
-                                </button>
-                            </div>
-                        </div>
+                            
                         </form>
+                        <div class="m-0 p-0">
+                            <div class="d-flex row justify-content-around">
+                            <button  class="btn  mt-2 mb-1 pt-1 pb-1">
+                                Google
+                            </button>
+                            <button class="btn  mt-2 mb-1 pt-1 pb-1">
+                                Facebook
+                            </button>
+                            <button class="btn mt-2 mb-1 pt-1 pb-1">
+                                Linkedin
+                            </button><button  class="btn mt-2 mb-1 pt-1 pb-1">
+                                Twitter
+                            </button>
+                        </div>
+                    </div>
                     </div>
             </div>
     </div>
