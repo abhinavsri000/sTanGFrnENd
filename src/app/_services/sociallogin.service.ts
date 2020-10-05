@@ -9,7 +9,7 @@ export class SocialloginService {
   twitterUrl='https://api.twtter.com/oauth';
   oauth_token;
   constructor( private http : HttpClient) { }
-  public savesresponse(response){
+  /* public savesresponse(response){
     this.url = 'http://localhost:8000/Api/Login/Savesresponse';
     return this.http.post(this.url,response);
   }
@@ -17,4 +17,6 @@ export class SocialloginService {
     this.oauth_token = this.http.post<any>(`${this.twitterUrl}/request_token`,{ oauth_nonce,oauth_callback,oauth_signature_method,oauth_timestamp,oauth_consumerKey,oauth_signature,oauth_version });
     this.twitterUrl = 'https://api.twitter.com/oauth/authenticate?oauth_token=Z6eEdO8MOmk394WozF5oKyuAv855l4Mlqo7hhlSLik' 
   };
+ */
+
 }

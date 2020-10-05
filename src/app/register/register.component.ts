@@ -39,7 +39,6 @@ export class RegisterComponent implements OnInit {
     }
     ngOnInit() {
       }
-    
   getEmailErrorMessage() {
     if (this.email.hasError('required')) {
       return 'You must enter a value';

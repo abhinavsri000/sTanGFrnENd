@@ -3,8 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
-  apiUrl: 'http://localhost:8000/api/v1',
+  production: true,
+  /* apiUrl: 'http://localhost:8000/api/v1', */
+  apiUrl : 'https://hidden-temple-43863.herokuapp.com/api/v1',
   urls: {
     baseUrl: '/api/'
 }

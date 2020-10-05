@@ -71,7 +71,6 @@ export class LoginComponent implements OnInit {
 socialSignIn(socialProvider: string) {  
 
   let socialPlatformProvider;  
-  console.log("hello");
   if (socialProvider === 'facebook') {  
     socialPlatformProvider = FacebookLoginProvider.PROVIDER_ID;  
   }
@@ -82,6 +81,7 @@ socialSignIn(socialProvider: string) {
     socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;  
   }
   this.OAuth.signIn(socialPlatformProvider).then(socialusers => {  
+    
     console.log(socialProvider, this.socialusers);  
     console.log(this.socialusers);  /* 
     this.Savesresponse(this.socialusers);  */ 
