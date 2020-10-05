@@ -17,6 +17,7 @@ import { MatDialogTitle} from '@angular/material/dialog';
 
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup = new FormGroup({});
+  disabled = false;
   loading = false;
   submitted = false;
   returnUrl: string;
@@ -60,7 +61,7 @@ export class RegisterComponent implements OnInit {
 
   onSubmit() {
       this.submitted = true;
-      if (this.registerForm.invalid) {  return;  } 
+      if (this.registerForm.invalid) {  this.error = "Please check the credentials"; return;  } 
       if(this.toc.value == false){ 
         this.error = "please Accept the terms and conditions"
         return; 
@@ -81,7 +82,7 @@ export class RegisterComponent implements OnInit {
           });
       },error => {
         this.loading = false;
-        this.error = error;
+        this.error = "Could not register . Please try again.";
       });
     }
     tnc() {
