@@ -21,27 +21,25 @@ export class AuthenticationService {
     public get currentUserValue(): User {
         return this.currentUserSubject.value;
     }
-
-    register(username:string, email: string, password: string, toc : boolean){
-        /* const password = CryptoJS.AES.encrypt(password.trim(), email.concat(username).trim().toString()); */
-        return this.http.post<any>(`${environment.apiUrl}/users/add`, { username, email,password, toc });
+    register(user_id:string, email: string, password: string){
+        return this.http.post<any>(`${environment.apiUrl}/signup/`, {user_id, email, password })
+        .pipe(map( res => {
+            console.log("");
+        },
+        error => {
+            console.log("");
+        }));
     }
 
-    login(email: string, password: string, rememberPassword: boolean) {
-      /*   const encryptedPasscode = CryptoJS.AES.encrypt(password.trim(), email.trim().toString());
-      */   
-     const encryptedPasscode = password;
-     if(rememberPassword==true){
-            localStorage.setItem('user',encryptedPasscode);
-        }
-        return this.http.post<any>(`${environment.apiUrl}/users/authenticate`, { email, encryptedPasscode })
+    login(email: string, password: string) {
+        return this.http.post<any>(`${environment.apiUrl}/signin/`, { email, password })
             .pipe(map(user => {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
                 localStorage.setItem('currentUser', JSON.stringify(user));
                 this.currentUserSubject.next(user);
                 return user;
             },error=>{
-                console.log("hello");
+                console.log(" ");
             }));
     }
 

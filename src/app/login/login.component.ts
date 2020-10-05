@@ -52,22 +52,19 @@ export class LoginComponent implements OnInit {
   this.submitted = true;
   // stop here if form is invalid
   if (this.loginForm.invalid) {
-    console.log("InvalidForm");  
+    console.log("");  
     return;
   }
 
   this.loading = true;
-  this.authenticationService.login(this.email.value, this.password.value, this.rememberPassword.value)
+  this.authenticationService.login(this.email.value, this.password.value)
       .pipe(first())
       .subscribe(
           data => {
               this.router.navigate(['\home']);
           },
           error => {
-              if(this.email.value=='test@test.com' && this.password.value == "test"){
-                this.router.navigate(['\home']);
-              }/* 
-              this.error = error; */
+              this.error = "email or password is wrong "; 
               this.loading = false;
           });
 }

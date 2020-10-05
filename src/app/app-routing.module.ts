@@ -9,15 +9,17 @@ import { LandingPageComponent} from './landing-page/landing-page.component';
 import { ProfileComponent} from './profile/profile.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
+
 const routes: Routes = [
-  { path : '', component: LandingPageComponent },
-  { path :'home', component: HomeComponent,/* ,  canActivate : [AuthGuard]  */    
+  { path : '', redirectTo : 'home', pathMatch:'full'},
+  { path : 'index', component: LandingPageComponent},
+  { path : 'home', component: HomeComponent,  canActivate : [AuthGuard] ,    
     children : [
       { path : '', redirectTo : 'profile', pathMatch: 'full' },
       { path : 'dashboard', component : DashboardComponent},
       { path : 'profile', component : ProfileComponent, pathMatch :'full' }]   
   },
-  { path : 'login', component : LoginComponent},
+  { path : 'login', component : LoginComponent,},
   { path : 'register', component : RegisterComponent},
   { path : '**' , component : PageNotFoundComponent},
 ];

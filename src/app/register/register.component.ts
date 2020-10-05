@@ -1,8 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators,FormControl } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { AuthenticationService } from "../_services/authentication.service"
 import { first } from 'rxjs/operators';
+import { MatDialog } from "@angular/material/dialog";
+import { MatDialogActions } from "@angular/material/dialog";
+import { MatDialogClose } from "@angular/material/dialog";
+import { MatDialogContent} from '@angular/material/dialog';
+import { MatDialogTitle} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-register',
@@ -11,74 +16,83 @@ import { first } from 'rxjs/operators';
 })
 
 export class RegisterComponent implements OnInit {
-  
+  registerForm: FormGroup = new FormGroup({});
   loading = false;
   submitted = false;
   returnUrl: string;
   error = '';  
   hide = true;
-  ConfirmPasswordErrorMesssage = " ";
-
-  username = new FormControl('');
+  user_id = new FormControl('');
   email = new FormControl('', [Validators.required, Validators.email]);
   /* password = new FormControl('',[Validators.required, Validators.pattern('^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[*.!@$%^&(){}[]:;<>,.?/~_+-=|\]).{8,32}$')]) */
   password = new FormControl();
   toc = new FormControl('',[Validators.required,Validators.requiredTrue]);
-
-  confirmpassword = new FormControl();
-  registerForm = new FormGroup({});
+  confirmPassword = new FormControl('',[Validators.required]);
   constructor(
     private formBuilder : FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     private authenticationService : AuthenticationService,
-    ) {}
-
+    public dialog: MatDialog
+    ) {
+    }
     ngOnInit() {
       }
-
+    
   getEmailErrorMessage() {
     if (this.email.hasError('required')) {
       return 'You must enter a value';
     }
     return this.email.hasError('email') ? 'Enter valid Email' : '';
   }
-  
   getPasswordErrorMessage() {
     if (this.password.hasError('required')) {
       return 'You must enter a value';
     }
     return this.password.hasError('pattern') ? 'Password is Weak' : '';
   }
-  onKeypressEvent(event: any){
-    console.log(this.password.value);
-    console.log(event.target.value);
-    console.log(this.ConfirmPasswordErrorMesssage);
-
-    if(event.target.value != this.password){
-      this.ConfirmPasswordErrorMesssage = " Password Does Not Match";
+  getConfirmPasswordErrorMessage() {
+    if (this.password.hasError('required')) {
+      return 'You must enter a value';
     }
-    else{
-      this.ConfirmPasswordErrorMesssage = " ";
-    }
+    return 'Password Does not match';
   }
+
   onSubmit() {
       this.submitted = true;
-      if (this.registerForm.invalid) {
-      console.log("InvalidForm");  
-      return;
-    } 
+      if (this.registerForm.invalid) {  return;  } 
+      if(this.toc.value == false){ 
+        this.error = "please Accept the terms and conditions"
+        return; 
+      }
       this.loading = true;
-      this.authenticationService.register(this.username.value,this.email.value,this.password.value,this.toc.value)
+      this.authenticationService.register(this.user_id.value,this.email.value,this.password.value)
       .pipe(first())
       .subscribe( data => {
-        this.router.navigate(['/home']);
+      this.authenticationService.login(this.email.value, this.password.value)
+        .pipe(first())
+        .subscribe(
+          data => {
+              this.router.navigate(['\home']);
+          },
+          error => {
+              this.error = "Provide Valid Credentials"; 
+              this.loading = false;
+          });
       },error => {
-        localStorage.setItem('email',this.email.value);
-        localStorage.setItem('password',this.password.value);
         this.loading = false;
         this.error = error;
       });
     }
+    tnc() {
+      this.dialog.open(tnc);
+    }
+}
 
+@Component({
+  selector: 'tnc',
+  templateUrl: './tnc.html',
+})
+export class tnc {
+  constructor(public dialog: MatDialog ){}
 }

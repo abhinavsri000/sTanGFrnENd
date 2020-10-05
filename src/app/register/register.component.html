@@ -23,8 +23,8 @@
                         <form [formGroup]="registerForm" class="mt-2 mb-2" (ngSubmit)="onSubmit()">
 
                             <mat-form-field class ="input" appearance="legacy">  
-                                <mat-label >Your Name</mat-label>
-                                <input  matInput placeholder="Name" [formControl]="username" required>
+                                <mat-label >Choose an userID</mat-label>
+                                <input  matInput placeholder="User ID" [formControl]="user_id" required>
                             </mat-form-field>
 
                             <mat-form-field class ="input" appearance="legacy">  
@@ -42,17 +42,19 @@
                                 </button>
                             </mat-form-field>
 
-                            <mat-form-field class ="input" appearance="legacy">
+                           <!--  <mat-form-field class ="input" appearance="legacy">
                                 <mat-label>Confirm the password</mat-label>
-                                <input matInput [type]="hide ? 'password' : 'text'" [formControl]="confirmpassword" required>
-                                <mat-error>{{ConfirmPasswordErrorMesssage}}</mat-error>  
+                                <input matInput [type]="hide ? 'password' : 'text'"[formControl]="confirmPassword">
+                                <mat-error>{{getConfirmPasswordErrorMessage()}}</mat-error>  
                                 <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                                 <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                                 </button>
                             </mat-form-field>
-                    
-                            <mat-checkbox [formControl]="toc" class="small">I accept terms and conditions and privacy policy</mat-checkbox>
-                            
+                             -->
+                            <div class="d-flex flex-row">
+                            <mat-checkbox [formControl]="toc" class="small tnc">I accept terms, conditions & privacy policy</mat-checkbox> 
+                            <button mat-icon-button type="button" (click)="tnc()"><mat-icon class="">open_in_new</mat-icon></button>
+                            </div>
                             <div class ='regbtn'>
                             <button [disabled]="loading" class="btn mt-3 mb-2 pt-1 pb-1">
                                 <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
