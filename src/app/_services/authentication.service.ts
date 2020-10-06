@@ -4,7 +4,6 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { map } from "rxjs/operators";
 import { User } from '../_models/user';
 import { environment } from '../../environments/environment';
-import * as CryptoJS from 'crypto-js';  
 
 @Injectable({
   providedIn: 'root'

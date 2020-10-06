@@ -1,7 +1,7 @@
 import { Component, OnInit,inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators,FormControl } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
-import { AuthenticationService } from "../_services/authentication.service"
+import { AuthenticationService } from "../../_services/authentication.service"
 import { first } from 'rxjs/operators';
 import { MatDialog } from "@angular/material/dialog";
 import { MatDialogActions } from "@angular/material/dialog";

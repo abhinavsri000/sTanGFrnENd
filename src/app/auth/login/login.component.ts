@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators,FormControl } from '@angular/forms';
-import { AuthenticationService } from "../_services/authentication.service"
+import { AuthenticationService } from "../../_services/authentication.service"
 import { first } from 'rxjs/operators';
 import { ActivatedRoute, Router, Params } from "@angular/router";
 import { GoogleLoginProvider, FacebookLoginProvider, SocialAuthService } from 'angularx-social-login';  
 import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';  
-import { Socialusers } from '../_models/socialusers';  
-import { SocialloginService } from '../_services/sociallogin.service';  
+import { Socialusers } from '../../_models/socialusers';  
+import { SocialloginService } from '../../_services/sociallogin.service';  
 
 @Component({
   selector: 'app-login',
@@ -81,9 +81,8 @@ socialSignIn(socialProvider: string) {
     socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;  
   }
   this.OAuth.signIn(socialPlatformProvider).then(socialusers => {  
-    
-    console.log(socialProvider, this.socialusers);  
-    console.log(this.socialusers);  /* 
+    localStorage.setItem('currentUser',JSON.stringify(socialusers))
+    this.router.navigate(['/home']) /* 
     this.Savesresponse(this.socialusers);  */ 
   });  
 }  
