@@ -22,7 +22,7 @@ import { HttpClientModule ,HTTP_INTERCEPTORS} from '@angular/common/http';
     AuthRoutingModule,
     MaterialModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers : [
 

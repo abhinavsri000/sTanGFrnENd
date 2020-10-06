@@ -13,7 +13,6 @@ export class HomeGuard implements CanActivate {
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         const currentUser = this.authenticationService.currentUserValue;
         if (currentUser) {
-            this.router.navigate(['/home']);
             return true;
         }
         this.router.navigate(['']);

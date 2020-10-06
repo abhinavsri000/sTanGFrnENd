@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule, } from '@angular/common';
-import { HomeRoutingModule } from './home-module.routing';
+import { MainRoutingModule } from './main-module.routing';
 import { MaterialModule } from '../material/material.module';
-import { HomeComponent } from './home /home.component';
+import { HomeComponent } from './home/home.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProfileComponent } from './profile/profile.component';
 
@@ -14,9 +14,9 @@ import { ProfileComponent } from './profile/profile.component';
   ],
   imports: [
     CommonModule,
-    HomeRoutingModule,
-    MaterialModule
+    MainRoutingModule,
+    MaterialModule,
   ]
 })
 
-export class HomeModule { }
+export class MainModule { }

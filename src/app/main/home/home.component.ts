@@ -30,7 +30,7 @@ export class HomeComponent{
   }
   logout() {
       this.authenticationService.logout();
-      this.router.navigate(['/index']);
+      this.router.navigate(['']);
   }
 
 }
