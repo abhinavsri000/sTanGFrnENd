@@ -6,7 +6,6 @@ import { ActivatedRoute, Router, Params } from "@angular/router";
 import { GoogleLoginProvider, FacebookLoginProvider, SocialAuthService } from 'angularx-social-login';  
 import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';  
 import { Socialusers } from '../../_models/socialusers';  
-import { SocialloginService } from '../../_services/sociallogin.service';  
 
 @Component({
   selector: 'app-login',
@@ -34,9 +33,7 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private authenticationService: AuthenticationService,
-    public OAuth: SocialAuthService,
-    private SocialloginService: SocialloginService,  
+    private authenticationService: AuthenticationService,  
 ) {
   // redirect to home if already logged in
   if (this.authenticationService.currentUserValue) { 
@@ -80,11 +77,11 @@ socialSignIn(socialProvider: string) {
   else if (socialProvider === 'linkedin') {  
     socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;  
   }
-  this.OAuth.signIn(socialPlatformProvider).then(socialusers => {  
+  /* this.OAuth.signIn(socialPlatformProvider).then(socialusers => {  
     localStorage.setItem('currentUser',JSON.stringify(socialusers))
-    this.router.navigate(['/home']) /* 
-    this.Savesresponse(this.socialusers);  */ 
-  });  
+    this.router.navigate(['/home'])  
+    this.Savesresponse(this.socialusers);  
+  }); */  
 }  
 
 Savesresponse(socialusers: Socialusers) {  /* 

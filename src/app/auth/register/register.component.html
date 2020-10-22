@@ -1,6 +1,6 @@
 <nav class="navbar fixed-top bg-light navbar-expand-lg rounded bg-light shadow-sm p-2 justify-content-between">
     <a routerLink="../" class="navbar-brand pl-4 p-0 ">
-      <img src="../assets/brand1.webp" class="w-50 p-0"/> 
+      <img src="../assets/brand2.svg" class=" p-0 brandimg text-danger"/> 
     </a>
     <div class="row">
         <a href="" class="nav align-content-center mr-5" >Home</a>
@@ -21,23 +21,20 @@
                         <h2 class="font-weight-bold m-0">Register</h2>
                         <p class="small m-0">Don't have an account? Create an account, it takes less than a moment. Really!</p>
                         <form [formGroup]="registerForm" class="mt-2 mb-2" (ngSubmit)="onSubmit()">
-
                             <mat-form-field class ="input" appearance="legacy">  
                                 <mat-label >Choose an userID</mat-label>
-                                <input  matInput placeholder="User ID" [formControl]="user_id" required>
+                                <input (input)="validate()" matInput placeholder="User ID" [formControl]="user_id" >
                             </mat-form-field>
-
                             <mat-form-field class ="input" appearance="legacy">  
                                 <mat-label>Your Email</mat-label>
-                                <input matInput placeholder="Email" [formControl]="email" required>
-                                <mat-error *ngIf="email.invalid">{{getEmailErrorMessage()}}</mat-error>
+                                <input (input)="validate()" matInput  placeholder="Email" [formControl]="email" >
+                                <mat-error *ngIf="email.invalid">{{getEmailErrorMessage()}}</mat-error> 
                             </mat-form-field>
-
                             <mat-form-field class ="input" appearance="legacy">
                                 <mat-label>Choose a password</mat-label>
-                                <input matInput [type]="hide ? 'password' : 'text'" [formControl]="password" required>
-                                <mat-error *ngIf="password.invalid">{{getPasswordErrorMessage()}}</mat-error>
-                                <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                <input matInput (input)="validate()" [type]="hide ? 'password' : 'text'" [formControl]="password" >
+                                <!-- <mat-error *ngIf="password.invalid">{{getPasswordErrorMessage()}}</mat-error>
+                                 --><button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                                 <svg *ngIf = "!hide" width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-eye-fill" fill="currentColor">
                                     <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
                                     <path fill-rule="evenodd" d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
@@ -49,24 +46,14 @@
                                   </svg>
                                 </button>
                             </mat-form-field>
-
-                           <!--  <mat-form-field class ="input" appearance="legacy">
-                                <mat-label>Confirm the password</mat-label>
-                                <input matInput [type]="hide ? 'password' : 'text'"[formControl]="confirmPassword">
-                                <mat-error>{{getConfirmPasswordErrorMessage()}}</mat-error>  
-                                <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                                </button>
-                            </mat-form-field>
-                             -->
                             <div class="d-flex flex-row">
-                            <mat-checkbox [formControl]="toc" class="small tnc">I accept terms, conditions & privacy policy</mat-checkbox> 
-                            <button mat-icon-button type="button" (click)="tnc()"><svg width="1.2em" height="1.2em" viewBox="0 0 16 16" class="bi bi-info-circle-fill" fill="currentColor">
+                            <mat-checkbox (change)='validate()' [disabled]="tncdisabled" [formControl]="tnc" class="small tnc">I accept terms, conditions & privacy policy</mat-checkbox> 
+                            <button mat-icon-button type="button" (click)="t_nc()"><svg width="1.2em" height="1.2em" viewBox="0 0 16 16" class="bi bi-info-circle-fill" fill="currentColor">
                                 <path fill-rule="evenodd" d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM8 5.5a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
                               </svg></button>
                             </div>
                             <div class ='regbtn'>
-                            <button [disabled]="disabled" class="btn mt-3 mb-2 pt-1 pb-1">
+                            <button [disabled]="btndisabled" class="btn mt-3 mb-2 pt-1 pb-1">
                                 <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                                 Register
                             </button>
@@ -77,15 +64,16 @@
                         </form>
                         <div class="m-0 p-0">
                             <div class="d-flex row justify-content-around">
-                            <button  class="btn  mt-2 mb-1 pt-1 pb-1">
+                            <button type="button" (click) = "social_login('google')" class="btn  mt-2 mb-1 pt-1 pb-1">
                                 Google
                             </button>
-                            <button class="btn  mt-2 mb-1 pt-1 pb-1">
+                            <button type ="button" (click) = "social_login('facebook')" class="btn  mt-2 mb-1 pt-1 pb-1">
                                 Facebook
                             </button>
-                            <button class="btn mt-2 mb-1 pt-1 pb-1">
+                            <button type = "button" (click) = "social_login('linkedIn')" class="btn mt-2 mb-1 pt-1 pb-1">
                                 Linkedin
-                            </button><button  class="btn mt-2 mb-1 pt-1 pb-1">
+                            </button>
+                            <button  type = "button" (click) = "social_login('twitter')" class="btn mt-2 mb-1 pt-1 pb-1">
                                 Twitter
                             </button>
                         </div>

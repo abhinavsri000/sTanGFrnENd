@@ -26,3 +26,105 @@ a:hover{
     background-color: rgb(4, 2, 44); 
     color: rgb(255, 255, 255);
 }
+.branding{
+    width: 10%;
+    color: 'red';
+}
+.container{
+    display : flex;
+    flex-direction : column ; 
+    justify-content:  center;
+    align-items: center;
+}
+
+.postboxdiv{
+    margin : 1px;
+    padding : 1px; 
+}
+.search_box{
+    border : 1px solid rgb(236, 236, 236);
+    padding : 0.3%;
+    padding-left : 1%;
+    border-radius : 50px;
+    background-color: rgb(240, 240, 240);
+    width: 40%;
+    margin : 0 auto;
+    color : rgb(20, 20, 20);
+    
+}
+.post_box{
+    border : 1px solid grey;
+    border-radius: 0;
+}
+.suggestions{
+    border-bottom : 1px solid rgb(207, 207, 207);
+    padding : 0.5%;
+    display : flex;
+    margin-top: 5px;
+
+}
+.chip{
+    border-radius : 50px ;
+    background-color: #e4e4e4;
+    color : rgba(0, 0, 0, 0.877);
+    padding :4px 12px;
+    margin : 2px 4px;
+    color : rgb(39, 39, 39);
+    border : 0px solid rgb(238, 238, 238);
+}
+
+.chip:hover{
+    cursor: pointer;
+    color : white;
+    background-color : #5c0c0c;
+}
+.profile{
+    width: 30px;
+    height: 30px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    background:rgb(221, 164, 164);
+}
+.title{
+    font-weight: 800;
+    font-size: xx-large;
+    background-color: rgb(255, 255, 255);
+}
+.content{
+    font-size: large;
+    line-height: 2;
+    background-color: rgb(255, 255, 255);
+}
+.feeds{
+    background-color:rgb(255, 255, 255);
+    max-height : 550px;
+    align-items : center;
+    overflow-y : scroll;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;
+}
+.feed_card{
+    border : 1px solid rgb(224, 224, 224);
+}
+.contentdiv{
+}
+.article{
+    overflow-y: scroll;
+    height : 550px;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;
+}
+.article::-webkit-scrollbar {
+    display: none;
+}
+.feeds::-webkit-scrollbar {
+    display: none;
+}
+.feed_title{
+    font-weight: bold;  
+    font-size: large;
+}
+.feed_text{
+margin-top: 10px;
+}

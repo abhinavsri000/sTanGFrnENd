@@ -1,0 +1,11 @@
+path('', RedirectView.as_view(url='api/v1/')), 
+    path('api/v1/',include('api.urls')),
+    path('api/v1/user/', include('user.urls')),
+    path('api/v1/user-profile/',include('userprofile.urls'))
+
+    'corsheaders',
+    'api.apps.ApiConfig',
+    'user.apps.UserConfig',
+    'rest_framework',
+    'userprofile.apps.UserprofileConfig',
+    'jwtauth'

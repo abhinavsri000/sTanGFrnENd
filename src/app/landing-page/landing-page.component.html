@@ -1,41 +1,30 @@
-<nav class="navbar bg-light navbar-expand-lg rounded p-2 justify-content-between">
-    <a href="" routerLink = "" class="navbar-brand pl-4 p-0 ">
-      <img src="../assets/brand1.webp" class="w-50 p-0"/> 
-    </a>
-    <div class="row">
-    <a href="" class="nav nav-item align-content-center mr-5" >Home</a>
-    <a href="" class="nav nav-item align-content-center mr-5">About</a>
-    <a href="" class="nav nav-item align-content-center mr-5">Services</a>
-    <a href="" class="nav nav-item align-content-center mr-5">Contact</a>
-    <button  routerLink="/login" class="btn">Login</button>   
-    <button  routerLink="/register" class="btn ml-2 mr-4" style="border : 0px solid rgb(100, 19, 19);border-radius: 20px; background-color: rgb(0, 36, 5); color: rgb(255, 255, 255);">SignUp</button>   
-    </div>
+<nav class="navbar bg-light navbar-expand-lg bg-light p-2 border-bottom">
+  <a href="" routerLink="" class="navbar-brand pl-4 p-0 ">
+    <img src="../assets/bran.svg" class=" branding p-0"/> 
+  </a>
+    <input type="text" placeholder="Search" class = "search_box nav" name ="search_box" />
+    <div class = "profile"></div>
 </nav>
-<div class="text-center" style="margin-top:10%; ">
-  <p class = "h1 text-center">Create Amazing <br>Surveys |<br> Polls | <br>Feedbacks. </p>
-  <button color="primary" class="btn ml-2 mr-4 " style="border : 0px solid rgb(255, 255, 255); background-color: rgb(0, 2, 37); color: rgb(255, 255, 255);">Get Started ></button>
+<div class = " pl-5 suggestions"><div *ngFor = "let item of items" class = "chip"  >{{item.value}}</div>
 </div>
-<div class="h1 font-weight-bold d-flex  w-100 mb-5 justify-content-center" style="margin-top: 10%;">
-  <p class="text-center">Power of Analytics in your Business,<br> Built Right into it.<br></p>
+<div class = "row mr-0 ml-0">
+  <div class = "col-8 p-0 m-0 contentdiv">
+    <div class = "article">
+    <div class = "title  m-5">This is a Title for desiging purpose.</div>
+    <div class = "content pl-5 pr-5">{{sample_text}}</div>
+  </div>
+  </div>
+  <div class = " col-4 feeds p-2 m-0"><div class = "feed_card m-3 p-3 shadow-sm rounded"><div class= "feed_title">{{feed_title}}</div><div class ="feed_text">{{feed_text}}</div></div>
+  <div class = "feed m-3 p-3 shadow-sm rounded">{{feed_title}}</div>
+  <div class = "feed m-3 p-3 shadow-sm rounded">{{feed_title}}</div>
+  <div class = "feed m-3 p-3 shadow-sm rounded">{{feed_title}}</div>
+  <div class = "feed m-3 p-3 shadow-sm rounded">{{feed_title}}</div>
+  <div class = "feed m-3 p-3 shadow-sm rounded">{{feed_title}}</div>
+  <div class = "feed m-3 p-3 shadow-sm rounded">{{feed_title}}</div>
+  <div class = "feed m-3 p-3 shadow-sm rounded">{{feed_title}}</div>
+  <div class = "feed m-3 p-3 shadow-sm rounded">{{feed_title}}</div>
+  <div class = "feed m-3 p-3 shadow-sm rounded">{{feed_title}}</div>
+  <div class = "feed m-3 p-3 shadow-sm rounded">{{feed_title}}</div>
+
 </div>
-<div class="container d-flex flex-row w-100 mt-5 mb-5 justify-content-center">
-  <div class="card w-25  m-3 p-3  rounded shadow-lg border-blue align-items-center">
-    <p class="text-center mt-2">Create Personal Surveys. <br> An Opinion Poll or Questionaire <br>Really You can do it the way you like.</p>
-    <button  routerLink="/" class="btn btncard">Personal</button>   
-
-  </div>
-  <div class="card w-25  m-3 p-3  rounded shadow-lg border-blue align-items-center">
-    <p class="text-center mt-2">Get feedbacks from Customers. <br> Create Awareness about your brand. <br> We would love to Help.</p>
-    <button  routerLink="/" class="btn btncard" >Business</button>   
-
-  </div>
-  <div class="card w-25  m-3 p-3  rounded shadow-lg border-blue align-items-center">
-    <p class="text-center mt-2">Got an Organisation. Improve <br> Operations with Employee Reviews<br> We are here to take Care.</p>
-    <button   routerLink="/" class="btn btncard" >Organization</button>   
-
-  </div>
-</div>
-<div class="container border-top shadow-sm mt-5 w-100 d-flex flex-column align-items-center">
-  <div class="m-1 mt-3 font-weight-normal">Made with ❤️ in India</div>
-  <div class="m-1 mb-3 font-weight-bold">copyright SurveyTabs.Inc</div>
 </div>

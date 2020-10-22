@@ -21,6 +21,7 @@ export class AuthenticationService {
         return this.currentUserSubject.value;
     }
     register(user_id:string, email: string, password: string){
+
         return this.http.post<any>(`${environment.apiUrl}/signup/`, {user_id, email, password })
         .pipe(map( res => {
             console.log("");
